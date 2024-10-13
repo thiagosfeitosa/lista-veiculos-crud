@@ -1,0 +1,40 @@
+<!-- NavBar -->
+<nav class="navbar navbar-expand-lg bg-primary-info">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="../assets/images/logo.png" alt="fake-logo" width="45px">
+      <h4 class="mb-0 mx-2">TSFeitosa</h4>
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" aria-controls="navbarNavAltMarkup" aria-expanded="!isCollapsed" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link text-center" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center" routerLink="/lista-mock">Lista (Mock)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center" routerLink="/lista">Lista (DB)</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center" routerLink="/contato">Contato</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main -->
+<div class="router-outlet-container">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-auto py-3">
+  <div class="container-fluid d-flex justify-content-center">
+    <span>© 2024 Teste Info Sistemas</span>
+  </div>
+</footer>

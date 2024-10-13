@@ -1,0 +1,30 @@
+/* Remove margens e paddings padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define a família de fontes padrão */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Remove sublinhado dos links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Define estilos padrão para botões */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Define estilos padrão para imagens */
+img {
+    max-width: 100%;
+    height: auto;
+}

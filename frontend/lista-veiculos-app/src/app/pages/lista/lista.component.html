@@ -1,0 +1,138 @@
+<div class="container mb-5 mt-3">
+    <h1>Lista de Veículos - DB</h1>
+
+    <form class="d-flex flex-wrap justify-content-between align-items-end">
+        <div class="mb-3 row">
+            <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Busca:</label>
+            <div class="col-xs-3 col-sm-auto">
+                <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+            </div>
+        </div>
+        <div>
+            <button class="d-flex btn info-btn-primary mb-3" (click)="openModal(false)">
+                <span class="material-icons">add</span> Adicionar Veículo
+            </button>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-striped info-table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Chassi</th>
+                    <th scope="col">Renavam</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let veiculo of filteredVeiculos">
+                    <td>{{ veiculo.id }}</td>
+                    <td>{{ veiculo.placa }}</td>
+                    <td>{{ veiculo.chassi }}</td>
+                    <td>{{ veiculo.renavam }}</td>
+                    <td>{{ veiculo.modelo }}</td>
+                    <td>{{ veiculo.marca }}</td>
+                    <td>{{ veiculo.ano }}</td>
+                    <td class="actions-column">
+                        <button class="btn info-btn-warning" (click)="openModal(true, veiculo)">
+                            <span class="material-icons">edit</span>
+                        </button>
+                        <button class="btn info-btn-danger" (click)="deletarVeiculo(veiculo.id)">
+                            <span class="material-icons">delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="flex-grow-1">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                (pageChange)="refreshVeiculos()">
+            </ngb-pagination>
+        </div>
+        <div>
+            <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshVeiculos()">
+                <option [ngValue]="2">2 itens por página</option>
+                <option [ngValue]="5">5 itens por página</option>
+                <option [ngValue]="10">10 itens por página</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Template -->
+<ng-template #veiculoModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">{{ isEditMode ? 'Editar Veículo' : 'Adicionar Veículo' }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="veiculoForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="placa" class="form-label">Placa <span class="text-danger">*</span></label>
+                <input type="text" id="placa" class="form-control" formControlName="placa"
+                    [ngClass]="{'is-invalid': veiculoForm.get('placa')?.invalid && veiculoForm.get('placa')?.touched}">
+                <div *ngIf="veiculoForm.get('placa')?.invalid && veiculoForm.get('placa')?.touched" class="text-danger">
+                    Placa é obrigatória.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="chassi" class="form-label">Chassi <span class="text-danger">*</span></label>
+                <input type="text" id="chassi" class="form-control" formControlName="chassi"
+                    [ngClass]="{'is-invalid': veiculoForm.get('chassi')?.invalid && veiculoForm.get('chassi')?.touched}">
+                <div *ngIf="veiculoForm.get('chassi')?.invalid && veiculoForm.get('chassi')?.touched"
+                    class="text-danger">
+                    Chassi é obrigatório.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="renavam" class="form-label">Renavam <span class="text-danger">*</span></label>
+                <input type="text" id="renavam" class="form-control" formControlName="renavam"
+                    [ngClass]="{'is-invalid': veiculoForm.get('renavam')?.invalid && veiculoForm.get('renavam')?.touched}">
+                <div *ngIf="veiculoForm.get('renavam')?.invalid && veiculoForm.get('renavam')?.touched"
+                    class="text-danger">
+                    Renavam é obrigatório e deve conter apenas números.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="modelo" class="form-label">Modelo <span class="text-danger">*</span></label>
+                <select id="modelo" class="form-select" formControlName="modelo"
+                    [ngClass]="{'is-invalid': veiculoForm.get('modelo')?.invalid && veiculoForm.get('modelo')?.touched}">
+                    <option *ngFor="let modelo of modelos" [value]="modelo">{{ modelo }}</option>
+                </select>
+                <div *ngIf="veiculoForm.get('modelo')?.invalid && veiculoForm.get('modelo')?.touched"
+                    class="text-danger">
+                    Modelo é obrigatório.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca <span class="text-danger">*</span></label>
+                <select id="marca" class="form-select" formControlName="marca"
+                    [ngClass]="{'is-invalid': veiculoForm.get('marca')?.invalid && veiculoForm.get('marca')?.touched}">
+                    <option *ngFor="let marca of marcas" [value]="marca">{{ marca }}</option>
+                </select>
+                <div *ngIf="veiculoForm.get('marca')?.invalid && veiculoForm.get('marca')?.touched" class="text-danger">
+                    Marca é obrigatória.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="ano" class="form-label">Ano <span class="text-danger">*</span></label>
+                <input type="text" id="ano" class="form-control" formControlName="ano"
+                    [ngClass]="{'is-invalid': veiculoForm.get('ano')?.invalid && veiculoForm.get('ano')?.touched}">
+                <div *ngIf="veiculoForm.get('ano')?.invalid && veiculoForm.get('ano')?.touched" class="text-danger">
+                    Ano é obrigatório e deve conter apenas números.
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn info-btn-outline-secondary" (click)="closeModal()">Cancelar</button>
+                <button type="submit" class="btn info-btn-primary mx-2">{{ isEditMode ? 'Salvar' : 'Adicionar'
+                    }}</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

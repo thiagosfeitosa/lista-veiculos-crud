@@ -1,0 +1,11 @@
+{
+    "name": "lista-veiculos-crud",
+    "version": "1.0.0",
+    "scripts": {
+      "start:back": "cd backend && npm start",
+      "install:back": "cd backend && npm install",
+      "start:front": "cd frontend/lista-veiculos-app && npm start",
+      "install:front": "cd frontend/lista-veiculos-app && npm install"
+    }
+  }
+  

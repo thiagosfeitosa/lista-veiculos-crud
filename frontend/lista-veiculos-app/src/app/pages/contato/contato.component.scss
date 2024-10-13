@@ -1,0 +1,20 @@
+.profile{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-image: url('../../../assets/images/Profile.jpg');
+    background-position: center;
+    background-size: contain;
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+    filter: gray; /* IE */
+}
+
+.social-media{
+    display: flex;
+    & a{
+        width: 3rem;
+        height: 3rem;
+        margin: 0 15px 0 0;
+    }
+}

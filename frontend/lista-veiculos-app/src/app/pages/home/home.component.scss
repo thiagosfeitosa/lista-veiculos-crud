@@ -1,0 +1,53 @@
+@import '../../../styles/variables';
+
+.bg-section-1{
+    background-color: $secondary-color;
+    padding:1rem 0;
+}
+
+.bg-section-2{
+    background-color: $white;
+    padding:1rem 0;
+}
+
+.info-cards-back{
+    background-color: transparent;
+    border: 1px solid $secondary-color;
+    color: $secondary-color;
+    height: 15rem;
+    &:hover{
+        box-shadow: 0 0 5px 0 white;
+        cursor: pointer;
+    }
+    & .card-header{
+        background-color: darken($primary-color, 5%);
+        font-size: larger;
+        font-weight: 600;
+    }
+    & .card-body{
+        background-color: lighten($primary-color, 5%);
+        overflow: auto;
+        border-radius: 0 0 5px 5px;
+    }
+}
+
+.info-cards-front{
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    height: 15rem;
+    &:hover{
+        box-shadow: 0 0 5px 0 $primary-color;
+        cursor: pointer;
+    }
+    & .card-header{
+        background-color: darken($secondary-color, 5%);
+        font-size: larger;
+        font-weight: 600;
+    }
+    & .card-body{
+        background-color: lighten($secondary-color, 5%);
+        overflow: auto;
+        border-radius: 0 0 5px 5px;
+    }
+}
