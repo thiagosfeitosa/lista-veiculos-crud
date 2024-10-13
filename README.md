@@ -40,6 +40,10 @@ Para fins de demonstração, estou utilizando dados mockados no frontend. Não �
    ```bash
     cd lista-veiculos-crud
 
+### Backend
+O Back está sendo executado com NodeJS e Express. Guardei as credenciais do BD em um .env e coloquei no .gitignore.<br>
+<mark>No dia da entrevista, conseguirei mostrar o CRUD do Back + MongoDB.</mark>
+
 ### Frontend
 1. Navegue até a pasta do frontend:
     ```bash
