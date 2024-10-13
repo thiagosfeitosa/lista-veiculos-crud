@@ -40,19 +40,6 @@ Para fins de demonstração, estou utilizando dados mockados no frontend. Não �
    ```bash
     cd lista-veiculos-crud
 
-### Backend
-1. Navegue até a pasta do backend:
-   ```bash
-    cd backend
-
-2. Instale as dependências:
-    ```bash
-    npm install
-
-3. Inicie o servidor backend:
-    ```bash
-    npm start
-
 ### Frontend
 1. Navegue até a pasta do frontend:
     ```bash
